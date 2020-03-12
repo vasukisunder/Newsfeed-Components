@@ -85,6 +85,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'My Lambda Newsletter',
+    date: 'Mar 11, 2020',
+    firstParagraph: `Hello, this is my test paragraph for this Lambda School Newsfeed project. This project is related to components and how to use them in Javascript! `,
+
+    secondParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent semper eleifend malesuada. Nulla ultricies erat in nisi pulvinar finibus. Duis non egestas orci. Donec euismod egestas condimentum. Nullam dignissim odio ac urna mollis, vitae commodo tellus commodo. Aliquam tempor maximus justo vel lobortis. Donec nibh augue, scelerisque lobortis finibus sed, porttitor id quam. Praesent congue tempus sodales.`,
+
+    thirdParagraph: `Nunc ut diam vel elit porta rutrum. Pellentesque vestibulum augue vitae dolor ornare, eget faucibus enim consequat. In blandit velit quis ultrices fermentum. Maecenas eros ligula, accumsan ac felis ut, eleifend pulvinar justo. Mauris commodo vulputate metus, ac faucibus tortor vestibulum eget. Ut venenatis convallis risus. Sed lobortis quam sit amet mollis pretium. Etiam pulvinar lectus vel neque consequat, sed vehicula metus ultrices.`
   }
 ];
 
@@ -112,3 +121,47 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function createArticle(title, date, first, second, third){
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const firstP = document.createElement('p');
+  const secondP = document.createElement('p');
+  const thirdP = document.createElement('p');
+  const expandButton = document.createElement('span');
+
+
+  article.appendChild(expandButton);
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(firstP);
+  article.appendChild(secondP);
+  article.appendChild(thirdP);
+
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  article.classList.add('close');
+  expandButton.classList.add('expandButton');
+  
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  firstP.textContent = first;
+  secondP.textContent = second;
+  thirdP.textContent = third;
+  expandButton.textContent = "Expand";
+  
+
+
+ expandButton.addEventListener('click', (event) => {
+    article.classList.toggle('article-open');
+  })
+
+  return article;
+}
+
+const content = document.querySelector('.articles');
+
+data.map(item => {
+  content.appendChild(createArticle(item.title, item.date, item.firstParagraph, item.secondParagraph, item.thirdParagraph));
+})
